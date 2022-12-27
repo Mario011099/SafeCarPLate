@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Placa Segura</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="plate_text">Placa: </string>
+    <string name="search_number_plate">Digite aquí y presiona 🔍</string>
+    <string name="photo_bottom">Sube una foto</string>
+    <string name="driver_data">Datos del conductor</string>
+    <string name="vehicle_data">Datos del vehículo</string>
+    <string name="about_title">Placa Segura</string>
+    <string name="about_text">
+        Es una aplicación gratuita que provee de un
+        servicio de consultas a las diferentes entidades
+        regulatorias y de supervisión de vehículos en el
+        Ecuador, con el objetivo de brindar información
+        para uso personal.
+        \n\n
+        La información consumida por Placa segura es
+        proporcionada por la Fiscalía General del Estado(FGE)
+        \n
+    </string>
+    <string name="email1">📧 asyepezr1@uce.edu.ec</string>
+    <string name="email2">📧 domaldonado@uce.edu.ec</string>
+    <string name="email3">📧 masanchezt1@uce.edu.ec</string>
+</resources>

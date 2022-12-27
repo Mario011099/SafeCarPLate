@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/search_licenseplate"
+        android:icon="@drawable/search_licenseplate"
+        android:title="Consultar" />
+    <item
+        android:id="@+id/search_crimes"
+        android:icon="@drawable/search_crimes"
+        android:title="Delitos" />
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/about"
+        android:title="Acerca de" />
+</menu>
