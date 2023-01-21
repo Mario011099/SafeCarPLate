@@ -1,15 +1,11 @@
 package com.example.safe_car_plate
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import androidx.fragment.app.Fragment
+import com.example.safe_car_plate.databinding.FragmentCrimesBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -17,43 +13,29 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class crimes : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    lateinit var bindingCrimes: FragmentCrimesBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    var placa:String = ""
+//    fun crimes(placa:String){
+//        this.placa = placa
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_crimes, container, false)
+        this.placa =  if (arguments?.get("placa") != null) arguments?.get("placa") as String else  ""
+        bindingCrimes = FragmentCrimesBinding.inflate(inflater,container, false)
+        initClass()
+        return bindingCrimes.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment crimes.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            crimes().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun initClass(){
+        bindingCrimes.infoFiscalia.settings.javaScriptEnabled = true
+        bindingCrimes.infoFiscalia.webViewClient = TolerantWebViewClient();
+        bindingCrimes.infoFiscalia.loadUrl("https://www.gestiondefiscalias.gob.ec/siaf/comunes/noticiasdelito/info_mod.php?businfo=a:1:%7Bi:0;s:7:\"$placa\";%7D")
+
     }
+
+
 }

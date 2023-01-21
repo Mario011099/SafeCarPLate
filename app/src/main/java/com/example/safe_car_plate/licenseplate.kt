@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.safe_car_plate.databinding.FragmentLicenseplateBinding
 import java.io.File
 import java.io.IOException
@@ -18,15 +19,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-lateinit var currentPhotoPath: String
-lateinit var binding: FragmentLicenseplateBinding
-
 /**
  * A simple [Fragment] subclass.
  * Use the [licenseplate.newInstance] factory method to
  * create an instance of this fragment.
  */
 class licenseplate : Fragment() {
+    lateinit var currentPhotoPath: String
+    lateinit var binding: FragmentLicenseplateBinding
 
 
     override fun onCreateView(
@@ -96,6 +96,18 @@ class licenseplate : Fragment() {
 
 
         }
+
+        binding.buttonBuscar.setOnClickListener {
+            var placa = binding.textPlaca.text.toString()
+            val bundle = Bundle()
+            bundle.putString("placa", placa)
+            val crimesFragment = crimes()
+            crimesFragment.arguments = bundle
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frame_layout, crimesFragment)
+            transaction?.commit()
+        }
+
 
     }
 
