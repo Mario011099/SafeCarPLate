@@ -22,4 +22,8 @@
     <string name="email1">📧 asyepezr1@uce.edu.ec</string>
     <string name="email2">📧 domaldonado@uce.edu.ec</string>
     <string name="email3">📧 masanchezt1@uce.edu.ec</string>
+
+    <string name="tfe_ocr_run_model" translatable="false">Run model</string>
+    <string name="tfe_ocr_texts_found" translatable="false">Text(s) Found</string>
+    <string name="tfe_ocr_no_text_found" translatable="false">No Text Found</string>
 </resources>

@@ -1,14 +1,13 @@
-package org.tensorflow.lite.examples.ocr
+package com.example.safe_car_plate.ocr
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_result.*
+import android.os.Bundle
+import com.example.safe_car_plate.R
 
 class Result : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
-        initActivity()
     }
 
     private fun initActivity() {
@@ -17,6 +16,6 @@ class Result : AppCompatActivity() {
         println("/////////// words///////////////")
         println(words)
 //        words.filter {  }
-        txtPlaca.text = words[0]
+        // txtPlaca.text = words[0]
     }
 }
