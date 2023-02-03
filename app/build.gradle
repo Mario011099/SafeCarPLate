@@ -110,4 +110,14 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite-gpu:2.11.0'
 
     implementation 'com.quickbirdstudios:opencv:4.5.3.0'
+
+    //Corrutinas
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+
+    // Text features
+    implementation 'com.google.android.gms:play-services-mlkit-text-recognition:16.0.0'
 }

@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         replaceFragment(licenseplate())
 
+        println("MainA -----")
+
        binding.navBottom1.setOnItemSelectedListener {
 
            when(it.itemId){
