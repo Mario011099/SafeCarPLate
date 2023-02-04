@@ -7,6 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="base_text">#000000</color>
+    <color name="red_label">#d62828</color>
+    <color name="buttons">#7C0E06</color>
+    <color name="textInputLayoutBg">#20E6E5E5</color>
+    <color name="textInputLayoutStroke">#FF9800</color>
+    <color name="fondo">#2085E685</color>
+    <color name="whiteTextColor">#fff</color>
     <color name="splashColor">#80D584</color>
     <color name="nav_bottom">#80D584</color>
     <color name="bottoms">#53BD58</color>
