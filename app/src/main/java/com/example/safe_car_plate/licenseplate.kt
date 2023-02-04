@@ -59,16 +59,14 @@ import java.util.concurrent.Executors
 private const val TAG = "licenseplate"
 
 class licenseplate : Fragment() {
-    lateinit var currentPhotoPath: String
+
     lateinit var binding: FragmentLicenseplateBinding
 
     //my
     private lateinit var placaImageView: ImageView
-    private lateinit var placaImageName: String
-    private lateinit var resultImageView: ImageView
     private lateinit var runButton: ImageButton
-    private lateinit var chipsGroup: ChipGroup
-
+    private lateinit var consultaButton: ImageButton
+    private lateinit var imageInput: InputImage
 
     //********Dependencia*******
     private var mSelectedImage: Bitmap? = null
@@ -87,21 +85,10 @@ class licenseplate : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLicenseplateBinding.inflate(inflater, container, false)
-        //initClass()
-        //initClass2()
-        placaImageView = binding.imgVPlaca
-        val assetManager = activity?.assets
-        placaImageName = "placa4.jpg"
-        try {
-            //my
-            val placaInputStream: InputStream? = assetManager?.open(placaImageName)
-            val placaBitmap = BitmapFactory.decodeStream(placaInputStream)
-            placaImageView.setImageBitmap(placaBitmap)
-        } catch (e: IOException) {
-            Log.e("FragmentPlaca", "Failed to open a test image")
-        }
-        imageSelec()
+
+        initClass()
         pruebaApiML()
+//        imageSelec()
         return binding.root
 
     }
@@ -164,6 +151,7 @@ class licenseplate : Fragment() {
         mGraphicOverlay = binding.graphicOverlay
         mGraphicOverlay!!.clear()
         mSelectedImage = getBitmapFromAsset(activity?.baseContext!!, "placa4.jpg")
+//        mSelectedImage = imageInput.bitmapInternal
         if (mSelectedImage != null) {
             // Get the dimensions of the View
             val targetedSize: Pair<Int, Int> = getTargetedWidthHeight()
@@ -196,15 +184,13 @@ class licenseplate : Fragment() {
 
     private fun pruebaApiML() {
         runButton = binding.buttonBuscar
-        runButton.setOnClickListener(View.OnClickListener { runTextRecognition() })
 
     }
 
     private fun runTextRecognition() {
-        val image = InputImage.fromBitmap(mSelectedImage!!, 0)
         val recognizer = TextRecognition.getClient()
         runButton.setEnabled(false)
-        recognizer.process(image)
+        recognizer.process(imageInput)
             .addOnSuccessListener { texts ->
                 runButton.setEnabled(true)
                 processTextRecognitionResult(texts)
@@ -216,6 +202,7 @@ class licenseplate : Fragment() {
     }
 
     private fun processTextRecognitionResult(texts: Text) {
+        var wordsList: MutableList<String?> = ArrayList<String?>()
         val blocks = texts.textBlocks
         if (blocks.size == 0) {
             showToast("No text found")
@@ -230,88 +217,34 @@ class licenseplate : Fragment() {
                     val textGraphic: GraphicOverlay.Graphic = TextGraphic(mGraphicOverlay, elements[k])
                     mGraphicOverlay?.add(textGraphic)
                     println("Palabra " + elements[k].text)
+                    wordsList.add(elements[k].text)
                 }
             }
         }
+        getListWords(wordsList)
+
     }
+
+    private fun getListWords(wordsList: MutableList<String?>) {
+        var v = wordsList.filter { s-> !(s.equals("ECUADOR") || s.equals("ANT")) }
+        println(v)
+        if(v.isNotEmpty()){
+            binding.textResultModel.text = v[0]?.uppercase()
+            binding.btnConsultar.visibility = View.VISIBLE
+            binding.idTextTitlePlaca.visibility = View.VISIBLE
+        }else{
+            showToast("No se encontró ninguna placa")
+        }
+
+    }
+
 
     private fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-        // Create an image file name
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        val storageDir: File? = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile(
-            "JPEG_${timeStamp}_", /* prefix */
-            ".jpg", /* suffix */
-            storageDir /* directory */
-        ).apply {
-            // Save a file: path for use with ACTION_VIEW intents
-            currentPhotoPath = absolutePath
-            placaImageName = absoluteFile.name
-        }
-    }
 
-    private fun dispatchTakePictureIntent() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            // Ensure that there's a camera activity to handle the intent
-            context?.let {
-                takePictureIntent.resolveActivity(it.packageManager)?.also {
-                    // Create the File where the photo should go
-                    val photoFile: File? = try {
-                        createImageFile()
-                    } catch (ex: IOException) {
-                        // Error occurred while creating the File
-                        null
-                    }
-                    // Continue only if the File was successfully created
-                    photoFile?.also {
-                        val photoURI: Uri = FileProvider.getUriForFile(
-                            requireContext(), "com.example.android.fileprovider", it
-                        )
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    }
-                }
-            }
-        }
-    }
-
-    private fun initClass() {
-
-        placaImageView = binding.imgVPlaca
-        binding.subirFoto.setOnClickListener {
-            var photoFile: File? = null
-            photoFile = createImageFile()
-            var imageUri: Uri
-            var intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//            val uriSavedImage = Uri.fromFile(File("/storage/emulated/0/Pictures/image.jpg"))
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                imageUri = Uri.parse("/storage/emulated/0/Pictures/image.jpg");
-            } else {
-                imageUri = Uri.fromFile(File("/storage/emulated/0/Pictures/image.jpg"));
-            }
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
-            startActivity(intent)
-        }
-
-        binding.buttonBuscar.setOnClickListener {
-            var placa = binding.textPlaca.text.toString()
-            val bundle = Bundle()
-            bundle.putString("placa", placa)
-            val crimesFragment = crimes()
-            crimesFragment.arguments = bundle
-            val transaction = activity?.supportFragmentManager?.beginTransaction()
-            transaction?.replace(R.id.frame_layout, crimesFragment)
-            transaction?.commit()
-        }
-
-
-    }
-
-    private fun initClass2(){
+    private fun initClass(){
         binding.subirFoto.setOnClickListener {
             requestPermission()
         }
@@ -331,8 +264,9 @@ class licenseplate : Fragment() {
             val dato = result.data?.data
             binding.imgVPlaca.setImageURI(dato)
             placaImageView = binding.imgVPlaca
+            imageInput = InputImage.fromFilePath(activity?.baseContext!!, result.data?.data!!)
+            runTextRecognition()
             println("Data $dato")
-            //startCreate()
         }
 
     }
@@ -374,22 +308,6 @@ class licenseplate : Fragment() {
             startActivity(intent)
         }
     }
-
-
-    private fun setImageView(imageView: ImageView, image: Bitmap) {
-        Glide.with(activity?.baseContext!!).load(image).override(250, 250).fitCenter().into(imageView)
-    }
-
-    private fun updateUIWithResults(modelExecutionResult: ModelExecutionResult) {
-        setImageView(resultImageView, modelExecutionResult.bitmapResult)
-        setChipsToLogView(modelExecutionResult.itemsFound)
-        enableControls(true)
-    }
-
-    private fun enableControls(enable: Boolean) {
-        runButton.isEnabled = enable
-    }
-
 
 
 }
