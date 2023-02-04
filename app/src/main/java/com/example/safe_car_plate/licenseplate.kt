@@ -70,15 +70,6 @@ class licenseplate : Fragment() {
     private lateinit var chipsGroup: ChipGroup
 
 
-    //Modelo
-    private var useGPU = false
-    private lateinit var viewModel: MLExecutionViewModel
-    private lateinit var textPromptTextView: TextView
-    private var ocrModel: OCRModelExecutor? = null
-    private val inferenceThread = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
-    private val mainScope = MainScope()
-    private val mutex = Mutex()
-
     //********Dependencia*******
     private var mSelectedImage: Bitmap? = null
     private var mGraphicOverlay: GraphicOverlay? = null
@@ -95,11 +86,20 @@ class licenseplate : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentLicenseplateBinding.inflate(inflater, container, false)
         //initClass()
         //initClass2()
         placaImageView = binding.imgVPlaca
+        val assetManager = activity?.assets
+        placaImageName = "placa4.jpg"
+        try {
+            //my
+            val placaInputStream: InputStream? = assetManager?.open(placaImageName)
+            val placaBitmap = BitmapFactory.decodeStream(placaInputStream)
+            placaImageView.setImageBitmap(placaBitmap)
+        } catch (e: IOException) {
+            Log.e("FragmentPlaca", "Failed to open a test image")
+        }
         imageSelec()
         pruebaApiML()
         return binding.root
@@ -200,7 +200,6 @@ class licenseplate : Fragment() {
 
     }
 
-
     private fun runTextRecognition() {
         val image = InputImage.fromBitmap(mSelectedImage!!, 0)
         val recognizer = TextRecognition.getClient()
@@ -238,11 +237,6 @@ class licenseplate : Fragment() {
 
     private fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
     @Throws(IOException::class)
@@ -301,8 +295,6 @@ class licenseplate : Fragment() {
             }
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri)
             startActivity(intent)
-
-
         }
 
         binding.buttonBuscar.setOnClickListener {
@@ -370,109 +362,7 @@ class licenseplate : Fragment() {
         }
     }
 
-//    private fun startCreate(){
-//
-//        val assetManager = activity?.assets
-//        placaImageName = "placa4.jpg"
-//        try {
-//            //my
-//            val placaInputStream: InputStream? = assetManager?.open(placaImageName)
-//            val placaBitmap = BitmapFactory.decodeStream(placaInputStream)
-//            placaImageView.setImageBitmap(placaBitmap)
-//        } catch (e: IOException) {
-//            Log.e("FragmentPlaca", "Failed to open a test image")
-//        }
-//
-////        resultImageView = binding.resultImageViewPlaca
-////        chipsGroup = binding.chipsGroup
-//        textPromptTextView = binding.textView
-//
-//        viewModel = ViewModelProvider.AndroidViewModelFactory(activity?.application!!).create(MLExecutionViewModel::class.java)
-//        viewModel.resultingBitmap.observe(
-//            this,
-//            Observer { resultImage ->
-//                if (resultImage != null) {
-//                    updateUIWithResults(resultImage)
-//                }
-//                enableControls(true)
-//            }
-//        )
-//
-////        mainScope.async(inferenceThread) { createModelExecutor(useGPU) }
-////        mainScope.launch {
-////            println("Dentro corrutina======")
-////            createModelExecutor(false)
-////        }
-//        lifecycleScope.launch(Dispatchers.Default){
-//            //createModelExecutor(false)
-//        }
-// ACTUALIZA AHI MISMO
-//        activity?.runOnUiThread {
-//            binding.photoDetect.setImageBitmap(imgWithResult)
-//        }
-//        println("----Antes Botón----")
-
-//        runButton = binding.buttonBuscar
-//        runButton.setOnClickListener {
-//            enableControls(false)
-//
-//            mainScope.async(inferenceThread) {
-//                mutex.withLock {
-//                    if (ocrModel != null) {
-//                        viewModel.onApplyModel(activity?.baseContext!!, placaImageName, ocrModel, inferenceThread)
-//                    } else {
-//                        Log.d(
-//                            TAG,
-//                            "Skipping running OCR since the ocrModel has not been properly initialized ..."
-//                        )
-//                    }
-//                }
-//            }
-//        }
-//
-//        println("----Después Botón----")
-//
-//        setChipsToLogView(HashMap<String, Int>())
-//        enableControls(true)
-
-//    }
-
-    private suspend fun createModelExecutor(useGPU: Boolean) {
-        mutex.withLock {
-            if (ocrModel != null) {
-                ocrModel!!.close()
-                ocrModel = null
-            }
-            try {
-                ocrModel = OCRModelExecutor(activity?.baseContext!!, useGPU)
-            } catch (e: Exception) {
-                Log.e(this.tag, "Fail to create OCRModelExecutor: ${e.message}")
-//                val logText: TextView = binding.logView
-//                logText.text = e.message
-            }
-        }
-    }
-
     private fun setChipsToLogView(itemsFound: Map<String, Int>) {
-//        chipsGroup.removeAllViews()
-        //my
-//        val keys = itemsFound.keys
-//        for ((word, color) in itemsFound) {
-//            val chip = Chip(requireContext())
-//            chip.text = word // /*******************PALABRAS IDENTIFICADAS******************************************
-//            chip.chipBackgroundColor = getColorStateListForChip(color)
-//            chip.isClickable = false
-//            chipsGroup.addView(chip)
-//        }
-//        val labelsFoundTextView: TextView = binding.textResultModel //CHECK
-//        if (chipsGroup.childCount == 0) {
-//            labelsFoundTextView.text = getString(R.string.tfe_ocr_no_text_found)
-//        } else {
-//            labelsFoundTextView.text = getString(R.string.tfe_ocr_texts_found)
-//        }
-//        chipsGroup.parent.requestLayout()
-
-        //my
         var wordsList: List<String?> = ArrayList<String?>()
         wordsList = arrayOf(itemsFound.keys)[0].toList()
         println("Lista de palabras"+ wordsList)
@@ -485,16 +375,6 @@ class licenseplate : Fragment() {
         }
     }
 
-    private fun getColorStateListForChip(color: Int): ColorStateList {
-        val states =
-            arrayOf(
-                intArrayOf(android.R.attr.state_enabled), // enabled
-                intArrayOf(android.R.attr.state_pressed) // pressed
-            )
-
-        val colors = intArrayOf(color, color)
-        return ColorStateList(states, colors)
-    }
 
     private fun setImageView(imageView: ImageView, image: Bitmap) {
         Glide.with(activity?.baseContext!!).load(image).override(250, 250).fitCenter().into(imageView)
@@ -502,9 +382,6 @@ class licenseplate : Fragment() {
 
     private fun updateUIWithResults(modelExecutionResult: ModelExecutionResult) {
         setImageView(resultImageView, modelExecutionResult.bitmapResult)
-//        val logText: TextView = binding.logView
-//        logText.text = modelExecutionResult.executionLog
-
         setChipsToLogView(modelExecutionResult.itemsFound)
         enableControls(true)
     }
