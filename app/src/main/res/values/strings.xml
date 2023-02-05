@@ -26,4 +26,11 @@
     <string name="tfe_ocr_run_model" translatable="false">Run model</string>
     <string name="tfe_ocr_texts_found" translatable="false">Text(s) Found</string>
     <string name="tfe_ocr_no_text_found" translatable="false">No Text Found</string>
+
+    <string name="userName">E-mail</string>
+    <string name="password">Contraseña</string>
+    <string name="btn_login">Iniciar</string>
+    <string name="label">Iniciar</string>
+    <string name="login">Iniciar Sesión</string>
+
 </resources>

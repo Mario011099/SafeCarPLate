@@ -11,12 +11,12 @@ apply plugin: 'kotlin-kapt'
 
 android {
     namespace 'com.example.safe_car_plate'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.safe_car_plate"
         minSdk 25 //27
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -78,26 +78,25 @@ dependencies {
 //    implementation group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
 
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.core:core-splashscreen:1.0.0-alpha02'
+    implementation 'androidx.core:core-splashscreen:1.0.0'
 
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.google.guava:guava:28.2-android'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.3.71'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.20'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8'
 
     //Modelo de tensorflow
     implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
@@ -116,8 +115,23 @@ dependencies {
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
 
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
 
     // Text features
     implementation 'com.google.android.gms:play-services-mlkit-text-recognition:16.0.0'
+
+    //Retrofit API
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //GSON manejar json
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //Swipe RecyclerView
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+    implementation 'androidx.core:core-splashscreen:1.0.0'
+    implementation 'com.google.android.material:material:1.9.0-alpha01'
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.8'
+
 }
