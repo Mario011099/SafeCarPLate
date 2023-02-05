@@ -16,6 +16,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.safe_car_plate.databinding.FragmentCrimesBinding
 import com.example.safe_car_plate.databinding.FragmentLicenseplateBinding
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.Text
+import com.google.mlkit.vision.text.TextRecognition
 import java.util.*
 
 
