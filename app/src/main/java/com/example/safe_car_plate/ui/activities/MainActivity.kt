@@ -1,11 +1,13 @@
-package com.example.safe_car_plate
+package com.example.safe_car_plate.ui.activities
 
-import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
+import com.example.safe_car_plate.R
+import com.example.safe_car_plate.ui.fragments.about
+import com.example.safe_car_plate.ui.fragments.crimes
 import com.example.safe_car_plate.databinding.ActivityMainBinding
+import com.example.safe_car_plate.ui.fragments.licenseplate
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

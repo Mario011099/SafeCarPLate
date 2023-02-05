@@ -1,4 +1,4 @@
-package com.example.safe_car_plate
+package com.example.safe_car_plate.ui.webview
 
 import android.net.http.SslError
 

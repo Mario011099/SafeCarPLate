@@ -1,10 +1,8 @@
-package com.example.safe_car_plate
+package com.example.safe_car_plate.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.View
-import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import com.example.safe_car_plate.databinding.ActivitySplashBinding
 

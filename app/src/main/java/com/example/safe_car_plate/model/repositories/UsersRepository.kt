@@ -1,4 +1,4 @@
-package com.example.safe_car_plate
+package com.example.safe_car_plate.model.repositories
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

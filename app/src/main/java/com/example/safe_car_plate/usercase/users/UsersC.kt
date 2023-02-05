@@ -1,8 +1,9 @@
-package com.example.safe_car_plate
+package com.example.safe_car_plate.usercase.users
 
 import android.util.Log
 import com.example.safe_car_plate.model.entities.api.Data
-import com.safecarplate.UsersApi
+import com.example.safe_car_plate.model.endpoint.UsersApi
+import com.example.safe_car_plate.model.repositories.UsersRepository
 
 
 class UsersC {

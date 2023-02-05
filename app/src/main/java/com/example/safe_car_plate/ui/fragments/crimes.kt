@@ -1,10 +1,11 @@
-package com.example.safe_car_plate
+package com.example.safe_car_plate.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.safe_car_plate.ui.webview.TolerantWebViewClient
 import com.example.safe_car_plate.databinding.FragmentCrimesBinding
 
 /**

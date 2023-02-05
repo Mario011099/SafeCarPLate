@@ -1,4 +1,4 @@
-package com.safecarplate
+package com.example.safe_car_plate.model.endpoint
 
 import com.example.safe_car_plate.model.entities.api.ApiResult
 import retrofit2.Response

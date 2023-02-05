@@ -1,18 +1,18 @@
-package com.example.safe_car_plate
+package com.example.safe_car_plate.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Window
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import com.example.safe_car_plate.databinding.ActivityLoginBinding
-import com.safecarplate.UsersApi
+import com.example.safe_car_plate.model.endpoint.UsersApi
+import com.example.safe_car_plate.model.repositories.UsersRepository
+import com.example.safe_car_plate.usercase.users.UsersC
 
 class Login : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -46,7 +46,7 @@ class Login : AppCompatActivity() {
                 val c = UsersC().getUsersC()
                 for(item in c){
                     if(item.email==txtUser && txtPass == "1234" && item.status=="active"){
-                        var intent = Intent(this@Login,MainActivity::class.java)
+                        var intent = Intent(this@Login, MainActivity::class.java)
                         startActivity(intent)
                     }
                     else{

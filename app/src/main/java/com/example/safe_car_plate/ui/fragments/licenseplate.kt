@@ -1,4 +1,4 @@
-package com.example.safe_car_plate
+package com.example.safe_car_plate.ui.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import com.example.safe_car_plate.R
 import com.example.safe_car_plate.databinding.FragmentLicenseplateBinding
 import java.io.File
 import java.io.IOException
