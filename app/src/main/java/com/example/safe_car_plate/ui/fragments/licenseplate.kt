@@ -1,5 +1,6 @@
 package com.example.safe_car_plate.ui.fragments
 
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
