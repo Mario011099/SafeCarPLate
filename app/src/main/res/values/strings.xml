@@ -27,4 +27,13 @@
     <string name="btn_login">Iniciar</string>
     <string name="label">Iniciar</string>
     <string name="login">Iniciar Sesión</string>
+    <string name="datos_encontrados">Datos Encontrados</string>
+    <string name="informacion_fiscalia">Informacion Fiscalía</string>
+    <string name="existe_la_placa">¿Existe la Placa?</string>
+    <string name="placa_no_ingresada">Placa no ingresada</string>
+    <string name="anio_modelo">Año de Modelo</string>
+    <string name="anio_ultimo_pago">Año Ultimo Pago</string>
+    <string name="clase_vehiculo">Clase de Vehículo</string>
+    <string name="marca_vehiculo">Marca de Vehículo</string>
+    <string name="modelo_vehiculo">Modelo de Vehículo</string>
 </resources>

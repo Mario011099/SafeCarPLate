@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.safe_car_plate.R
 import com.example.safe_car_plate.databinding.FragmentCrimesBinding
 import com.example.safe_car_plate.databinding.FragmentLicenseplateBinding
 import com.google.mlkit.vision.common.InputImage
@@ -110,13 +111,16 @@ class licenseplate : Fragment() {
     }
 
 
-    private fun initClass(){
+    private fun initClass() {
         runButton = binding.buttonBuscar
         consultaButton = binding.btnConsultar
         binding.subirFoto.setOnClickListener {
             requestPermission()
         }
         consultaButton.setOnClickListener {
+            consultarDatos()
+        }
+        binding.buttonBuscar.setOnClickListener {
             consultarDatos()
         }
 
@@ -169,12 +173,22 @@ class licenseplate : Fragment() {
 
     private fun consultarDatos() {
 
-        var intent = Intent(activity?.baseContext!!, FragmentCrimesBinding::class.java)
-        intent.putExtra("placa",placa)
-//        startActivity(intent)
-//        val mFragment: Fragment = FragmentCrimesBinding()
-//        fragmentManager().beginTransaction().replace(R.id.content_frame, mFragment)
-//            .commit()
+//        var intent = Intent(activity?.baseContext!!, FragmentCrimesBinding::class.java)
+//        intent.putExtra("placa",placa)
+////        startActivity(intent)
+////        val mFragment: Fragment = FragmentCrimesBinding()
+////        fragmentManager().beginTransaction().replace(R.id.content_frame, mFragment)
+////            .commit()
+
+        var placa = binding.textPlaca.text.toString()
+        val bundle = Bundle()
+        bundle.putString("placa", placa)
+        val crimesFragment = crimes()
+        crimesFragment.arguments = bundle
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.replace(R.id.frame_layout, crimesFragment)
+        transaction?.commit()
+
     }
 
 }
