@@ -34,7 +34,11 @@ class Login : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        init()
+//        init()
+        binding.buttonLogin.setOnClickListener {
+            var intent = Intent(this@Login, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun init() {
