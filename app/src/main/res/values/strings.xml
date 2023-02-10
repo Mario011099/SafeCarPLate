@@ -22,7 +22,7 @@
     <string name="email1">📧 asyepezr1@uce.edu.ec</string>
     <string name="email2">📧 domaldonado@uce.edu.ec</string>
     <string name="email3">📧 masanchezt1@uce.edu.ec</string>
-    <string name="userName">E-mail</string>
+    <string name="userName">ID</string>
     <string name="password">Contraseña</string>
     <string name="btn_login">Iniciar</string>
     <string name="label">Iniciar</string>
