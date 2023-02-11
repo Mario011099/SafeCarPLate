@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,6 +47,7 @@ class licenseplate : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLicenseplateBinding.inflate(inflater, container, false)
+        placa = binding.textPlaca.text.toString()
         return binding.root
 
     }
@@ -97,6 +99,7 @@ class licenseplate : Fragment() {
         if(v.isNotEmpty()){
             placa = v[0]?.uppercase()!!.replace("-","")
             binding.textResultModel.text = v[0]?.uppercase()
+            binding.textPlaca.text = Editable.Factory.getInstance().newEditable(placa)
             binding.btnConsultar.visibility = View.VISIBLE
             binding.idTextTitlePlaca.visibility = View.VISIBLE
 
@@ -179,14 +182,20 @@ class licenseplate : Fragment() {
 ////        val mFragment: Fragment = FragmentCrimesBinding()
 ////        fragmentManager().beginTransaction().replace(R.id.content_frame, mFragment)
 ////            .commit()
+        if(placa!=null){
+            val placaC = binding.textPlaca.text.toString()
+            println("Placa enviada"+ placaC)
+            val bundle = Bundle()
+            bundle.putString("placa",placaC )
+            val crimesFragment = crimes()
+            crimesFragment.arguments = bundle
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frame_layout, crimesFragment)
+            transaction?.commit()
+        }else{
+            Toast.makeText(activity?.baseContext, "Por favor ingrese la placa con una foto o en el campo de texto",Toast.LENGTH_SHORT).show()
+        }
 
-        val bundle = Bundle()
-        bundle.putString("placa", placa.replace('-',' ').replace("\\s+".toRegex(), " "))
-        val crimesFragment = crimes()
-        crimesFragment.arguments = bundle
-        val transaction = activity?.supportFragmentManager?.beginTransaction()
-        transaction?.replace(R.id.frame_layout, crimesFragment)
-        transaction?.commit()
 
     }
 
