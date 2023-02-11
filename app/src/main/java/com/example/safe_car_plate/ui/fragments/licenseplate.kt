@@ -180,9 +180,8 @@ class licenseplate : Fragment() {
 ////        fragmentManager().beginTransaction().replace(R.id.content_frame, mFragment)
 ////            .commit()
 
-        var placa = binding.textPlaca.text.toString()
         val bundle = Bundle()
-        bundle.putString("placa", placa)
+        bundle.putString("placa", placa.replace('-',' ').replace("\\s+".toRegex(), " "))
         val crimesFragment = crimes()
         crimesFragment.arguments = bundle
         val transaction = activity?.supportFragmentManager?.beginTransaction()
