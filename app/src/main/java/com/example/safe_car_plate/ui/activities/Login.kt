@@ -33,12 +33,7 @@ class Login : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
-//        init()
-        binding.buttonLogin.setOnClickListener {
-            var intent = Intent(this@Login, MainActivity::class.java)
-            startActivity(intent)
-        }
+        init()
     }
 
     private fun init() {
@@ -50,7 +45,7 @@ class Login : AppCompatActivity() {
             lifecycleScope.launch(Dispatchers.Main) {
                 val c = UsersC().getUsersC()
                 for(item in c){
-                    if(item.id==identificador && txtPass == "1234" && item.status=="active"){
+                    if(item.id==identificador && txtPass == "1234" && item.status == "active"){
                         var intent = Intent(this@Login, MainActivity::class.java)
                         startActivity(intent)
                     }
