@@ -7,6 +7,7 @@ import com.example.safe_car_plate.R
 import com.example.safe_car_plate.ui.fragments.about
 import com.example.safe_car_plate.ui.fragments.crimes
 import com.example.safe_car_plate.databinding.ActivityMainBinding
+import com.example.safe_car_plate.ui.fragments.HomeFragment
 import com.example.safe_car_plate.ui.fragments.licenseplate
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.search_licenseplate -> replaceFragment(licenseplate())
                 R.id.search_crimes -> replaceFragment(crimes())
                 R.id.about -> replaceFragment(about())
+                R.id.tip -> replaceFragment(HomeFragment())
 
                 else ->{
 
