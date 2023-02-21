@@ -13,4 +13,9 @@
         android:id="@+id/about"
         android:icon="@drawable/about"
         android:title="Acerca de" />
+    <item
+        android:id="@+id/tip"
+        android:icon="@drawable/tip"
+        android:title="Consejos"
+        />
 </menu>
