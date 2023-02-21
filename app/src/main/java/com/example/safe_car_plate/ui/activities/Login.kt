@@ -20,7 +20,7 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //imprimirUsers()
+        imprimirUsers()
     }
     private fun imprimirUsers(){
         val UserApi = UsersRepository().getInstance().create(UsersApi::class.java)
@@ -33,12 +33,7 @@ class Login : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
-//        init()
-        binding.buttonLogin.setOnClickListener {
-            var intent = Intent(this@Login, MainActivity::class.java)
-            startActivity(intent)
-        }
+        init()
     }
 
     private fun init() {
