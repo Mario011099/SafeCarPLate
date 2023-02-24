@@ -94,7 +94,7 @@ class licenseplate : Fragment() {
     }
 
     private fun getListWords(wordsList: MutableList<String?>) {
-        var v = wordsList.filter { s-> !(s.equals("ECUADOR") || s.equals("ANT") ) }
+        var v = wordsList.filter { s-> !(s?.contains("ECUADOR") == true || s.equals("ANT") || (s?.length!! < 7)) }
         println(v)
         if(v.isNotEmpty()){
             placa = v[0]?.uppercase()!!.replace("-","")
