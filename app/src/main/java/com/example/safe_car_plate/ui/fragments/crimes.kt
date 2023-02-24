@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.example.safe_car_plate.R
 import com.example.safe_car_plate.databinding.FragmentCrimesBinding
 import com.example.safe_car_plate.ui.webview.TolerantWebViewClient
 import com.example.safe_car_plate.usercase.placas.PlacasC
@@ -21,6 +22,7 @@ class crimes : Fragment() {
     lateinit var bindingCrimes: FragmentCrimesBinding
 
     var placa: String = ""
+    var placaNoExiste = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +37,7 @@ class crimes : Fragment() {
     }
 
     private fun initClass() {
+        placaNoExiste = resources.getString(R.string.placa_no_existe)
         bindingCrimes.infoFiscalia.settings.javaScriptEnabled = true
         bindingCrimes.infoFiscalia.webViewClient = TolerantWebViewClient();
         bindingCrimes.infoFiscalia.loadUrl("https://www.gestiondefiscalias.gob.ec/siaf/comunes/noticiasdelito/info_mod.php?businfo=a:1:%7Bi:0;s:7:\"$placa\";%7D")
@@ -51,13 +54,20 @@ class crimes : Fragment() {
                 bindingCrimes.claseVehiculo.text = c.clase
                 bindingCrimes.marcaVehiculo.text = c.marca
                 bindingCrimes.modeloVehiculo.text = c.modelo
+            }else{
+                bindingCrimes.anioModelo.text = placaNoExiste
+                bindingCrimes.anioUltimoPago.text = placaNoExiste
+                bindingCrimes.claseVehiculo.text = placaNoExiste
+                bindingCrimes.marcaVehiculo.text = placaNoExiste
+                bindingCrimes.modeloVehiculo.text = placaNoExiste
             }
         }
     }
+
     private fun placaDataExists() {
         lifecycleScope.launch(Dispatchers.Main) {
             val c = PlacasC().getPlacaExists(placa)
-            if (c != null) bindingCrimes.existePlaca.text = c.mensaje
+            if (c != null) bindingCrimes.existePlaca.text = c.mensaje else bindingCrimes.existePlaca.text = placaNoExiste
             println("PLACA EXISTS: " + c)
         }
     }

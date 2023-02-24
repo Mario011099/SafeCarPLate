@@ -31,6 +31,7 @@
     <string name="informacion_fiscalia">Informacion Fiscalía</string>
     <string name="existe_la_placa">¿Existe la Placa?</string>
     <string name="placa_no_ingresada">Placa no ingresada</string>
+    <string name="placa_no_existe">Placa no existe</string>
     <string name="anio_modelo">Año de Modelo</string>
     <string name="anio_ultimo_pago">Año Ultimo Pago</string>
     <string name="clase_vehiculo">Clase de Vehículo</string>

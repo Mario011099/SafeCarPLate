@@ -40,23 +40,31 @@ class Login : AppCompatActivity() {
         val txt = binding.txtUser
         binding.buttonLogin.setOnClickListener {
             val txtUser = binding.txtUser.text.toString()
-            val identificador= txtUser.toInt()
-            lifecycleScope.launch(Dispatchers.Main) {
-                val c = UsersC().getUsersC()
-                for(item in c){
-                    if(item.id==identificador && item.status=="active"){
-                        var intent = Intent(this@Login, MainActivity::class.java)
-                        startActivity(intent)
+            val identificador= txtUser.toIntOrNull()
+            if(identificador==null){
+                Snackbar.make(
+                    txt, "Por favor ingrese un identificador de usuario",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }else{
+                lifecycleScope.launch(Dispatchers.Main) {
+                    val c = UsersC().getUsersC()
+                    for(item in c){
+                        if(item.id==identificador && item.status=="active"){
+                            var intent = Intent(this@Login, MainActivity::class.java)
+                            startActivity(intent)
+                        }
+                        else{
+                            Snackbar.make(
+                                txt, "ID incorrecto y/o Cuenta inactiva",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
                     }
-                    else{
-                        Snackbar.make(
-                            txt, "ID incorrecto y/o Cuenta inactiva",
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-                println("USUARIOS: "+ c)
+                    println("USUARIOS: "+ c)
 
-            }}
+                }}
+            }
+
     }
 }

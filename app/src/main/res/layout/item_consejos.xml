@@ -16,7 +16,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="@color/splashColor"
+        android:background="@color/items"
         android:padding="8dp">
 
         <ImageView
@@ -34,11 +34,11 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="5dp"
             android:layout_toEndOf="@id/img_consejo"
+            android:maxLines="1"
+            android:textColor="@color/colorDark"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/colorDark"
-            android:maxLines="1"
-            tools:text="Tips"/>
+            tools:text="Tips" />
 
         <LinearLayout
             android:id="@+id/ll_catRat"
@@ -49,7 +49,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginBottom="5dp"
             android:layout_toEndOf="@id/img_consejo"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal" />
 
         <TextView
             android:id="@+id/tv_descripcion"
@@ -60,9 +60,9 @@
             android:layout_marginRight="16dp"
             android:layout_toEndOf="@id/img_consejo"
             android:ellipsize="end"
-            android:textSize="12sp"
             android:maxLines="7"
             android:textColor="@color/colorDark"
+            android:textSize="12sp"
             tools:text="Descripciones" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
