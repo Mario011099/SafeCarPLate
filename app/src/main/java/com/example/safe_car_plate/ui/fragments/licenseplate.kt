@@ -1,4 +1,4 @@
-package com.example.safe_car_plate.ui.fragments
+package com. example.safe_car_plate.ui.fragments
 
 import android.app.Activity
 import android.content.Intent
@@ -94,7 +94,7 @@ class licenseplate : Fragment() {
     }
 
     private fun getListWords(wordsList: MutableList<String?>) {
-        var v = wordsList.filter { s-> !(s.equals("ECUADOR") || s.equals("ANT")) }
+        var v = wordsList.filter { s-> !(s.equals("ECUADOR") || s.equals("ANT") ) }
         println(v)
         if(v.isNotEmpty()){
             placa = v[0]?.uppercase()!!.replace("-","")
