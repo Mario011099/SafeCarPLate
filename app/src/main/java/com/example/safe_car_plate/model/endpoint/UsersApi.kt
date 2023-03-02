@@ -12,5 +12,5 @@ interface UsersApi {
     suspend fun getUsers() : Response<UsersApiResult>
 
     @GET("users/{id}")
-    suspend fun getUserById(@Path("id") id: String) : Response<Users>
+    suspend fun getUserById(@Path("id") id: Int) : Response<Users>
 }
